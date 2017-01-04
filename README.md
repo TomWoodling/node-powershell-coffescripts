@@ -8,26 +8,26 @@ it functions alongside Get-ServiceCrobot.ps1 (see scripts folder).
 
 Get-ServiceCrobot.coffee:
 
-```shell = require('../node_modules/node-powershell/dist/index.js')
-module.exports = (robot) ->
-  robot.respond /get service (.*)$/i, (msg) ->
-    serNa = msg.match[1]
-    sendRoom = msg.message.room
-    ps = new shell(
-      executionPolicy: 'Bypass'
-      debugMsg: true)
-    params = [ {
-      name: 'Name'
-      value: serNa
-    } ]
-    ps.addCommand('./scripts/Get-ServiceHubot.ps1', params).then(->
-      ps.invoke()
-    ).then((output) ->
-      console.log output
-      result = JSON.parse output
-      msg.send result.output
-      ps.dispose()
-    ).catch (err) ->
-      console.log err
-      msg.send err
-      ps.dispose()```
+```shell = require('../node_modules/node-powershell/dist/index.js')  
+module.exports = (robot) ->  
+  robot.respond /get service (.*)$/i, (msg) ->  
+    serNa = msg.match[1]  
+    sendRoom = msg.message.room  
+    ps = new shell(  
+      executionPolicy: 'Bypass'  
+      debugMsg: true)  
+    params = [ {  
+      name: 'Name'  
+      value: serNa  
+    } ]  
+    ps.addCommand('./scripts/Get-ServiceHubot.ps1', params).then(->  
+      ps.invoke()  
+    ).then((output) ->  
+      console.log output  
+      result = JSON.parse output  
+      msg.send result.output  
+      ps.dispose()  
+    ).catch (err) ->  
+      console.log err  
+      msg.send err  
+      ps.dispose()```  
