@@ -30,8 +30,9 @@
         elseif ($Status -eq 'Stop') {Stop-Service -Name $Name}
         elseif ($Status -eq 'Restart') {Restart-Service -Name $Name}
         else {
+            $result.success = $false
             $result.output = "Service $($Name) does not exist on this server."
-            exit
+            return $result
             }
         Start-Sleep -Seconds 2
         $service = Get-Service -Name $Name -ErrorAction Stop
