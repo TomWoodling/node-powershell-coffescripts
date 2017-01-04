@@ -15,7 +15,6 @@ module.exports = (robot) ->
       # Set the search term to a varaible
     serNa = msg.match[1]
     sendRoom = msg.message.room
-
     ps = new shell(
       executionPolicy: 'Bypass'
       debugMsg: true)
