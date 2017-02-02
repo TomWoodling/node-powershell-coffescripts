@@ -13,9 +13,9 @@
         # Name of the Service
         [Parameter(Mandatory=$true)]
         $Serv,
-		[Parameter(Mandatory=$true)]
-		[ValidateSet("Stop","Start","Restart")]
-		$Status
+        [Parameter(Mandatory=$true)]
+        [ValidateSet("Stop","Start","Restart")]
+        $Status
     )
 
     # Create a hashtable for the results
