@@ -11,16 +11,22 @@ module.exports = (robot) ->
     # Capture the user message using
   robot.respond /set service (.*)$/i, (msg) ->
       # Set the search term to a varaible
-    
-    strMa = msg.match[1]
+    handOff = msg.match[0]
+    splits = handOff.split(' ')
+    serNa = splits[3]
+    serSta = splits[4]   
     sendRoom = msg.message.room
 
     ps = new shell(
       executionPolicy: 'Bypass'
       debugMsg: true)
     params = [ {
-      name: 'Handoff'
-      value: strMa
+      name: 'Serv'
+      value: serNa
+    }
+    {
+      name:'Status'
+      value: serSta
     } ]
     ps.addCommand('./scripts/Set-ServiceHubot.ps1', params).then(->
       ps.invoke()

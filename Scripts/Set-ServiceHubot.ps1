@@ -7,35 +7,33 @@
     Set-SerivceHubot -Name dhcp -Room slackstorm -Status start
 #>
 
-    [CmdletBinding()]
+   [CmdletBinding()]
     Param
     (
         # Name of the Service
         [Parameter(Mandatory=$true)]
-        $Handoff
+        $Serv,
+		[Parameter(Mandatory=$true)]
+		[ValidateSet("Stop","Start","Restart")]
+		$Status
     )
 
     # Create a hashtable for the results
     $result = @{}
 
-    #split the handoff
-    $Name = $Handoff.split(' ')[0]
-    $Status = $Handoff.split(' ')[1]
-    
     # Use try/catch block            
     try
     {
         # Use ErrorAction Stop to make sure we can catch any errors
-        if ($Status -eq 'Start') {Start-Service -Name $Name}
-        elseif ($Status -eq 'Stop') {Stop-Service -Name $Name}
-        elseif ($Status -eq 'Restart') {Restart-Service -Name $Name}
+        if ($Status -eq 'Start') {Start-Service -Name $Serv}
+        elseif ($Status -eq 'Stop') {Stop-Service -Name $Serv}
+        elseif ($Status -eq 'Restart') {Restart-Service -Name $Serv}
         else {
-            $result.success = $false
-            $result.output = "Service $($Name) does not exist on this server."
-            return $result
+            $result.output = "Service $($Serv) does not exist on this server."
+            exit
             }
         Start-Sleep -Seconds 2
-        $service = Get-Service -Name $Name -ErrorAction Stop
+        $service = Get-Service -Name $Serv -ErrorAction Stop
         
         # Create a string for sending back to slack. * and ` are used to make the output look nice in Slack. Details: http://bit.ly/MHSlackFormat
         $result.output = "Service $($service.Name) (*$($service.DisplayName)*) is now ``$($service.Status.ToString())``."
@@ -46,7 +44,7 @@
     catch
     {
         # If this script fails we can assume the service did not exist
-        $result.output = "Service $($Name) does not exist on this server."
+        $result.output = "Service $($Serv) does not exist on this server."
         
         # Set a failed result
         $result.success = $false
