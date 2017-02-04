@@ -1,8 +1,13 @@
 # node-powershell-coffescripts
 Coffescripts &amp; associated powershell scripts to be used with node-powershell and hubot
 
+To see them working you can grab a docker image from https://hub.docker.com/r/twoodling/snowbot/
+use the sample config.json file with your added slack api key.  If you have a computer vision api
+key for Microsoft Cognitive Services you can add that too and snowbot will describe pictures and
+respond in your channel - https://www.microsoft.com/cognitive-services/en-us/computer-vision-api
+
 This is a pair of scripts to demo interaction with services for a hubot - e.g.
-Get-ServiceCrobot.coffee - works like the example scripts for edge-ps 
+Get-ServiceCrobot.coffee - works like the example scripts  
 described at https://hodgkins.io/chatops-on-windows-with-hubot-and-powershell
 it functions alongside Get-ServiceCrobot.ps1 (see scripts folder).
 
