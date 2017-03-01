@@ -1,0 +1,22 @@
+{
+    "Path":  "C:\\snowbot\\config.json",
+    "BotAdapter":  "slack",
+    "BotDebugLog":  {
+                        "IsPresent":  true
+                    },
+    "BotDescription":  "Snowbot is a containerized chatbot",
+    "BotPath":  "C:\\snowbot",
+    "BotOwner":  "Santa",
+    "LogPath":  "C:\\snowbot\\Logs",
+    "BotName":  "snowbot",
+    "ArgumentList":  "--adapter slack",
+    "BotExternalScriptsPath":  "C:\\snowbot\\external-scripts.json",
+    "PidPath":  "C:\\snowbot\\snowbot.pid",
+    "EnvironmentVariables":  {
+             "HUBOT_ADAPTER":  "slack",
+             "HUBOT_LOG_LEVEL":  "debug",
+             "HUBOT_SLACK_TOKEN": XXXXXXXXXX,
+             "REDIS_URL":  "redis://localhost:6379",
+             "COMVIS_KEY": XXXXXXXXXX
+                             }
+}
