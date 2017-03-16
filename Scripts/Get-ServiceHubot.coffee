@@ -32,4 +32,7 @@ module.exports = (robot) ->
       result = JSON.parse output
       msg.send result.output
       ps.dispose()
-    )
+    ).catch (err) ->
+      console.log err
+      msg.send err
+      ps.dispose()
