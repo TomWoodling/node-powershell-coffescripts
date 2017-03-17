@@ -1,4 +1,7 @@
 # node-powershell-coffescripts
+
+![Status](https://img.shields.io/badge/Bots-Rule-brightgreen.svg)
+
 Coffescripts &amp; associated powershell scripts to be used with node-powershell and hubot
 
 To see them working you can grab a docker image from https://hub.docker.com/r/twoodling/snowbot/
