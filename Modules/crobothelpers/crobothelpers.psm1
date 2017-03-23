@@ -163,3 +163,82 @@ foreach ($shh in $shhz) {
     }
 $script:cyclos
 }
+
+
+function Get-TranslateToken {
+
+$headers = @{
+    'Ocp-Apim-Subscription-Key'=$env:TRANSLATOR_KEY
+    }
+
+$url = "https://api.cognitive.microsoft.com/sts/v1.0/issueToken"
+
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+
+$ris = Invoke-RestMethod -Uri $url -Headers $headers -Method Post 
+
+$script:opine = $ris
+
+return $script:opine
+
+}
+
+
+function Get-LanguageOfPhrase {
+[cmdletbinding()]
+param (
+    [Parameter(Mandatory=$true)]    
+    [string]$phrase    
+    )
+
+$miik = Get-TranslateToken
+
+$muuk = "Bearer" + " " + $miik
+
+$headers = @{
+    'authorization'= $muuk
+    }
+
+$url = "https://api.microsofttranslator.com/v2/http.svc/Detect?text=$phrase"
+
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+
+$ris = Invoke-RestMethod -Uri $url -Headers $headers -Method Get 
+
+$script:opine = $ris.string.'#text'
+
+return $script:opine
+
+}
+
+
+function Get-Translation {
+[cmdletbinding()]
+param (
+    [Parameter(Mandatory=$true)]    
+    [string]$phrase,
+    $tolang='en'     
+    )
+
+$orglang = Get-LanguageOfPhrase -phrase $phrase
+
+$miik = Get-TranslateToken
+
+$muuk = "Bearer" + " " + $miik
+
+$headers = @{
+    'authorization'=$muuk
+    'from'=$orglang
+    }
+
+$url = "https://api.microsofttranslator.com/v2/http.svc/Translate?text=$phrase&to=$tolang"
+
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+
+$ris = Invoke-RestMethod -Uri $url -Headers $headers -Method Get 
+
+$script:opine = $ris.string.'#text'
+
+return $script:opine
+
+}
