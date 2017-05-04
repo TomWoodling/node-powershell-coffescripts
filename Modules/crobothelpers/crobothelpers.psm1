@@ -95,7 +95,7 @@ $json_data = @{
 
 $postParams =  @{json_data=$json_data} # Test connection
 
-$url = "https://api.projectoxford.ai/vision/v1.0/ocr?language=unk&detectOrientation =true"
+$url = "https://westus.api.cognitive.microsoft.com/vision/v1.0/ocr?language=unk&detectOrientation =true"
 
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
