@@ -126,7 +126,7 @@ $json_data = @{
 
 $postParams =  @{json_data=$json_data} # Test connection
 
-$url = "https://api.projectoxford.ai/vision/v1.0/analyze?visualFeatures=Description&language=en"
+$url = "https://westus.api.cognitive.microsoft.com/vision/v1.0?visualFeatures=Description&language=en"
 
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
@@ -148,7 +148,7 @@ param(
 
 $htmlQ = [uri]::EscapeUriString($query.replace('?',''))
 $script:cyclos = New-Object System.Collections.ArrayList
-$hmmz = Invoke-RestMethod -uri  "https://api.projectoxford.ai/luis/v2.0/apps/$env:LUIS_APP?subscription-key=$env:LUIS_SUB&q=$htmlQ"
+$hmmz = Invoke-RestMethod -uri  "https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/$env:LUIS_APP?subscription-key=$env:LUIS_SUB&q=$htmlQ"
 $shhz = $hmmz.entities 
 foreach ($shh in $shhz) {
     $cat = $shh.type.split('.')[2]
