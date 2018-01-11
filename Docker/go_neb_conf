@@ -1,33 +1,33 @@
     clients: 
-      - UserID: "@wizbo:($env:servname)" 
-        AccessToken: $env:tokey 
-        HomeserverURL: "https://($env:servname):443" 
+      - UserID: "%2:%1"
+        AccessToken: "%7" 
+        HomeserverURL: "https://%1:443" 
         Sync: true 
         AutoJoinRooms: true 
-        DisplayName: "Wizbo" 
+        DisplayName: "%3" 
 
     services: 
       - ID: "giphy_service" 
         Type: "giphy" 
-        UserID: "`@wizbo:($env:servname)"
+        UserID: "%2:%1"
         Config: 
-          api_key: $env:giphy
+          api_key: "%4"
 
       - ID: "guggy_service" 
         Type: "guggy" 
-        UserID: "`@wizbo:($env:servname)"
+        UserID: "%2:%1"
         Config: 
-          api_key:  $env:guggy
+          api_key:  "%5"
 
       - ID: "wikipedia_service" 
         Type: "wikipedia" 
-        UserID: "`@wizbo:($env:servname)"
+        UserID: "%2:%1"
         Config: 
 
       - ID: "rss_service" 
         Type: "rssbot" 
-        UserID: "`@wizbo:($env:servname)" 
+        UserID: "%2:%1"
         Config: 
           feeds: 
             "https://www.theregister.co.uk/emergent_tech/artificial_intelligence/headlines.atom?unit=second&interval=60": 
-              rooms: ["!vZfFtjfEFYRPItHYwD:($env:servname)"]
+              rooms: ["%6:%1"]
