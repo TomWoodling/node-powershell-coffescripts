@@ -9,7 +9,7 @@
     "BotOwner":  "test tom",
     "LogPath":  "%2\\Logs",
     "BotName":  "%3",
-    "ArgumentList":  "--adapter slack",
+    "ArgumentList":  "--adapter %1",
     "BotExternalScriptsPath":  "%2\\external-scripts.json",
     "PidPath":  "%2\\crobot.pid",
     "EnvironmentVariables":  {
