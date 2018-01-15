@@ -1,0 +1,24 @@
+{
+    "Path":  "%2\\config.json",
+    "BotAdapter":  "%1",
+    "BotDebugLog":  {
+                        "IsPresent":  true
+                    },
+    "BotDescription":  "chatbot",
+    "BotPath":  "%2",
+    "BotOwner":  "test tom",
+    "LogPath":  "%2\\Logs",
+    "BotName":  "%3",
+    "ArgumentList":  "--adapter slack",
+    "BotExternalScriptsPath":  "%2\\external-scripts.json",
+    "PidPath":  "%2\\crobot.pid",
+    "EnvironmentVariables":  {
+                    "HUBOT_ADAPTER": "%1",
+       				"HUBOT_LOG_LEVEL": "debug",
+   	    			"HUBOT_SLACK_TOKEN": "%4",
+   		    		"REDIS_URL":  "redis://localhost:6379",
+			    	"COMVIS_KEY": "%5",
+				    "LUIS_SUB": "%6",
+                    "LUIS_APP": "%7"
+                             }
+}
