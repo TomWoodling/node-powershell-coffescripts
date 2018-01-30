@@ -1,31 +1,3 @@
-function New-CredObject {
-param(
-       [Parameter(Mandatory=$true,HelpMessage="Credential name",ValueFromPipeline=$true,Position=1)]
-           [string]$credname,
-       [Parameter(Mandatory=$true,HelpMessage="User name to pass",ValueFromPipeline=$true,Position=2)]
-           [string]$user,
-       [Parameter(Mandatory=$true,HelpMessage="Password",ValueFromPipeline=$true,Position=3)]
-           [string]$pass
-)
-$credpath = "c:\crobot\creds\($env:USERNAME)Cred_$credname.xml"
-New-Object System.Management.Automation.PSCredential("$user", (ConvertTo-SecureString -AsPlainText -Force "$pass")) | Export-CliXml $credpath -Force
-}
-
-
-
-Function Get-NewAsciiPass() {
-Param(
-[int]$length=12
-)
-$ascii=$NULL;For ($a=48;$a –le 122;$a++) {$ascii+=,[char][byte]$a}
-For ($loop=1; $loop –le $length; $loop++) {
-           $TempPassword+=($ascii | GET-RANDOM)
-           }
-return $TempPassword
-}
-
-
-
 function Ignore-SelfSignedCerts {
    add-type -TypeDefinition  @"
        using System.Net;
@@ -39,41 +11,6 @@ function Ignore-SelfSignedCerts {
        }
 "@
    [System.Net.ServicePointManager]::CertificatePolicy = New-Object TrustAllCertsPolicy
-}
-
-
-function Get-SSApitest {
-
-param
-    (
-    [Parameter(Mandatory=$true)]
-    $serv,
-    [Parameter(Mandatory=$true)]
-    [ValidateSet('Start','Stop','Restart')]
-    $state
-    )
-
-$json_data = @{
-        'key1' = 'value1'
-        'key2' = $serv
-        'key3' = $state
-    } | ConvertTo-Json # Test connection
-
-$postParams =  @{'St2-Api-Key'=$env:ST2_API_KEY;"Content-Type"='application/json'} # Test connection
-
-$server = "https://$env:ST2ip"
-$url = "/api/v1/webhooks/sample"
-
-Ignore-SelfSignedCerts
-
-[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-
-$ris = Invoke-WebRequest -Uri $server$url -Headers $postParams -Body $json_data -Method Post 
-
-$script:objects = $ris.Content #| ConvertFrom-Json | Select-Object -ExpandProperty objects
-
-#$script:added = $objects."$($output.name)".fields
-
 }
 
 
@@ -136,32 +73,6 @@ $script:opine = $ris.description.captions.text
 
 return $script:opine
 
-}
-
-
-function Get-EncQuery {
-[cmdletbinding()]
-param(
-    [Parameter(Mandatory=$true)]
-    [String]$query
-)
-
-$htmlQ = [uri]::EscapeUriString($query.replace('?',''))
-$script:cyclos = New-Object System.Collections.ArrayList
-$hmmz = Invoke-RestMethod -uri  "https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/$env:LUIS_APP?subscription-key=$env:LUIS_SUB&q=$htmlQ"
-$shhz = $hmmz.entities 
-foreach ($shh in $shhz) {
-    $cat = $shh.type.split('.')[2]
-    $subcat = $shh.type.split('.')[3]
-    if ($cat -eq $subcat) {
-        $add = "$($shh.entity) is a $cat"
-        }
-    else {
-        $add = "$($shh.entity) is a $cat $subcat"
-        }
-    $script:cyclos.Add($add) > $null
-    }
-$script:cyclos
 }
 
 
