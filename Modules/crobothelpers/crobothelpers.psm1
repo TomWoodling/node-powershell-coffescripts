@@ -76,6 +76,19 @@ return $script:opine
 }
 
 
+function Send-SlackBotFile {
+    [CmdletBinding()]
+    Param
+    (
+        # Name of the Service
+        [Parameter()]
+        [string]$Channels="#bot-conversation",
+        $path
+    )
+
+    Send-SlackFile -Token $env:HUBOT_SLACK_TOKEN -Channel $Channels -Path $path
+    }
+    
 function Get-TranslateToken {
 
 $headers = @{
