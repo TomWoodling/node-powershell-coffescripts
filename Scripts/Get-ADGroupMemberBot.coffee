@@ -25,7 +25,7 @@ module.exports = (robot) ->
       name:'Channel'
       value: sendRoom
     } ]
-    ps.addCommand('./scripts/Get-ADGroupMembsBot.ps1', params).then(->
+    ps.addCommand('./scripts/Get-ADGroupMemberBot.ps1', params).then(->
       ps.invoke()
     ).then((output) ->
       console.log output
