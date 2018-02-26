@@ -5,8 +5,6 @@ function Get-ADDirectReports
 		This function retrieve the directreports property from the IdentitySpecified.
 		Optionally you can specify the Recurse parameter to find all the indirect
 		users reporting to the specify account (Identity).
-        ***THIS IS ADAPTED TO WORK WITH THE COOL.BLUE DOMAIN FROM THE OFFICE DOMAIN***
-        - TW
 	
 	.DESCRIPTION
 		This function retrieve the directreports property from the IdentitySpecified.
@@ -172,7 +170,7 @@ param (
 
 $grat = New-Object System.Collections.ArrayList
 
-$Members = Get-ADGroupMember -Identity $GroupName -Server nlam01-vpdc01.cool.blue
+$Members = Get-ADGroupMember -Identity $GroupName
 $members | % {
     if($_.ObjectClass -eq "group") {
         $grot = $_ | select @{n='name';e={$_.name}}, @{n='SAM';e={$_.samaccountname}}
