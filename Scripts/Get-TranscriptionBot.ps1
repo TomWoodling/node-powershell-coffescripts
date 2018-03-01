@@ -14,7 +14,9 @@
         [Parameter(Mandatory=$true)]
         [string]$phrase,
         [Parameter(Mandatory=$true)]
-        [string]$language
+        [string]$language,
+        [Parameter(Mandatory=$true)]
+        [string]$channel
     )
 
     # Create a hashtable for the results
