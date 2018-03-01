@@ -135,11 +135,8 @@
         # Use ErrorAction Stop to make sure we can catch any errors
         $transcribe = Get-Translation -phrase "$phrase" -tolang "$tolang" -ErrorAction Stop
         
-        # Create a string for sending back to slack. * and ` are used to make the output look nice in Slack. Details: http://bit.ly/MHSlackFormat
-        $result.output = "``$transcribe``"
-        
-        # Set a successful result
-        $result.success = $true
+        #Send a separate Slack message so the correct characters are displayed
+        Send-SlackMessage -Token $env:HUBOT_SLACK_TOKEN -Username $ENV:BOTNAME -Text "``$($outs | select -ExpandProperty translation)``" -Channel $channel
     }
     catch
     {
@@ -148,8 +145,10 @@
         
         # Set a failed result
         $result.success = $false
+
+        # Return the result and conver it to json
+        return $result | ConvertTo-Json
     }
     
-    # Return the result and conver it to json
-    return $result | ConvertTo-Json
+
     
