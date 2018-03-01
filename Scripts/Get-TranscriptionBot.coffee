@@ -25,7 +25,11 @@ module.exports = (robot) ->
     {
       name: 'language'
       value: toLang
-    } ]
+    }
+    {
+      name: 'channel'
+      value: sendRoom
+    }     ]
     ps.addCommand('./scripts/Get-TranscriptionBot.ps1', params).then(->
       ps.invoke()
     ).then((output) ->
