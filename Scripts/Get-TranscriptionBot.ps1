@@ -139,7 +139,7 @@
         $outs = $slangs[1] | select @{n='Translation';e={$transcribe}}
         
         #Send a separate Slack message so the correct characters are displayed
-        Send-SlackMessage -Token $env:HUBOT_SLACK_TOKEN -Username $ENV:BOTNAME -Text "``$($outs | select -ExpandProperty translation)``" -Channel $channel
+        Send-SlackMessage -Token $env:HUBOT_SLACK_TOKEN -IconEmoji ':crobot:' -Username $ENV:BOTNAME -Text "``$($outs | select -ExpandProperty translation)``" -Channel $channel
     }
     catch
     {
