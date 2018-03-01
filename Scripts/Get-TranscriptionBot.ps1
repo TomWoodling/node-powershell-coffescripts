@@ -134,6 +134,7 @@
     {
         # Use ErrorAction Stop to make sure we can catch any errors
         $transcribe = Get-Translation -phrase "$phrase" -tolang "$tolang" -ErrorAction Stop
+        $outs = $slangs[1] | select @{n='Translation';e={$transcribe}}
         
         #Send a separate Slack message so the correct characters are displayed
         Send-SlackMessage -Token $env:HUBOT_SLACK_TOKEN -Username $ENV:BOTNAME -Text "``$($outs | select -ExpandProperty translation)``" -Channel $channel
