@@ -20,14 +20,16 @@ Param
 #Get details for snippet
 $path="C:\ps\Results_for_$($User.Replace('.','_')).csv"
 
+$regex = [regex] '^SG-(NL[A-Z]{2}|BE[A-Z]{2})[0-9]{2}'
 
+Get-ADGroup -Filter * | select name | where {$_.name -Match $regex -and ($_.name.split('-').count -ge 4)}
 # Create a hashtable for the results
 $result = @{}
 
 try {
     # Use ErrorAction Stop to make sure we can catch any errors
     $groups = Get-UserGroupMembershipRecursive -UserName "$User"
-    $groups.memberof | where groupcategory -EQ 'Security' | select name | Export-Csv -Path $path -Force -NoTypeInformation
+    $groups.memberof | select name | where {$_.name -Match $regex -and ($_.name.split('-').count -ge 4)} | Export-Csv -Path $path -Force -NoTypeInformation
     # Create a string for sending back to slack. * and ` are used to make the output look nice in Slack. Details: http://bit.ly/MHSlackFormat
     $result.output = ":kuribo: Request for $user processed..."
     #Write-Output "Processing request now..."
