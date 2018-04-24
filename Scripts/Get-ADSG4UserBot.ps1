@@ -22,7 +22,7 @@ $path="C:\ps\Results_for_$($User.Replace('.','_')).csv"
 
 $regex = [regex] '^SG-(NL[A-Z]{2}|BE[A-Z]{2})[0-9]{2}'
 
-Get-ADGroup -Filter * | select name | where {$_.name -Match $regex -and ($_.name.split('-').count -ge 4)}
+#Get-ADGroup -Filter * | select name | where {$_.name -Match $regex -and ($_.name.split('-').count -ge 4)}
 # Create a hashtable for the results
 $result = @{}
 
