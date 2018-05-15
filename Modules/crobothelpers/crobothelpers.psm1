@@ -168,6 +168,41 @@ return $script:opine
 }
 
 
+function Import-NewHubotConfiguration
+{
+    [CmdletBinding()]
+    Param
+    (
+        # Path to the PoshHubot Configuration File
+        [Parameter(Mandatory=$true)]
+        [ValidateScript({
+        if(Test-Path -Path $_ -ErrorAction SilentlyContinue)
+        {
+            return $true
+        }
+        else
+        {
+            throw "$($_) is not a valid path."
+        }
+        })]
+        [string]
+        $ConfigPath
+    )
+
+    try
+    {
+        $Config = Get-Content -Path $ConfigPath -Raw | ConvertFrom-Json
+    }
+    catch
+    {
+        throw "There was a problem importing the configuration file. Confirm your JSON formatting."
+    }
+
+
+    return $Config
+}
+
+
 function Install-NewHubot {
 
     # Took out the forced old version of nodejs from Matt's script (it doesn't work anymore)
@@ -193,9 +228,9 @@ function Install-NewHubot {
             $ConfigPath
         )
     
-        $Config = Import-HubotConfiguration -ConfigPath $ConfigPath
+        $Config = Import-NewHubotConfiguration -ConfigPath $ConfigPath
     
-        Install-Chocolatey
+        #Install-Chocolatey
     
         Write-Verbose -Message "Installing NodeJS"
         Start-Process -FilePath 'choco.exe' -ArgumentList 'install nodejs.install -y' -Wait -NoNewWindow
