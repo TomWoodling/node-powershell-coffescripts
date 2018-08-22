@@ -4,6 +4,8 @@
 
 Coffescripts &amp; associated powershell scripts to be used with node-powershell and hubot
 
+This can now be considered deprecated since hubot doesn't apparently work with slack anymore!!!!!!
+
 To see them working you can grab a docker image from https://hub.docker.com/r/twoodling/snowbot/
 use the sample config.json file with your added slack api key.  If you have a computer vision api
 key for Microsoft Cognitive Services you can add that too and snowbot will describe pictures and
