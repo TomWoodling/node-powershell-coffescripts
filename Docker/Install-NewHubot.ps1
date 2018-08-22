@@ -38,7 +38,7 @@
     Start-Process -FilePath npm -ArgumentList "install -g coffee-script" -Wait -NoNewWindow
 
     Write-Verbose -Message "Installing Hubot Generator"
-    Start-Process -FilePath npm -ArgumentList "install -g yo generator-hubot" -Wait -NoNewWindow
+    Start-Process -FilePath npm -ArgumentList "install -g yo generator-hubot@1.0.0" -Wait -NoNewWindow
 
     Write-Verbose -Message "Installing Forever"
     Start-Process -FilePath npm -ArgumentList "install -g forever" -Wait -NoNewWindow
